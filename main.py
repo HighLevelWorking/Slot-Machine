@@ -1,8 +1,19 @@
+import random
+
+
 current_balance = 0
 
 def not_zero():
     global current_balance
-    current_balance -= 10
+    while True:
+        try:
+            user_input = int(input("Place your bet amount: "))
+            if user_input <= current_balance:
+                return user_input
+            else:
+                print(f"You can only bet amount equal to or less then your current balance which is: {current_balance}")
+        except:
+            print("YOu can only use integer values")
 
 def zero():
     while True:
@@ -11,6 +22,15 @@ def zero():
             return user_input
         except:
             print("Only use integers")
+
+def spinning_gambling():
+    symbol = ("🍒", "🍉", "🥭", "🔔", "⭐")
+    print("******************************")
+    print(random.choice(symbol), end = " ")
+    print(random.choice(symbol), end = " ")
+    print(random.choice(symbol))
+    print("******************************")
+
 
 def main():
     while True:
@@ -22,10 +42,16 @@ def main():
     
         if current_balance <= 0:
             current_balance = zero()
-            print(current_balance)
+            print(f"Current balance: {current_balance} Rs")
+            value_to_bet = not_zero()
+            print("Spinning...")
+            print()
+            spinning_gambling()
+            input()
         else:
-            not_zero()
-            print(current_balance)
+            print(f"Current balance: {current_balance} Rs")
+            value_to_bet = not_zero()
+            print("Spinning...")
 
 if __name__ == "__main__":
     main()
